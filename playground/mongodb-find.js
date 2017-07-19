@@ -14,20 +14,22 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err,db)=>{
 	});*/
 	/*db.collection('Users').insertOne({
 		name:'sam sharma',
-		age:21,
-		location:'gurugram',
-		_id:123
+		sex:'male'
 	},(err,res)=>{
-
+		console.log(err);
+		console.log(res.ops);
 	});*/
-	db.collection('Users').find({_id:123}).toArray().then((docs)=>{
+	/*db.collection('Users').find({}).toArray().then((docs)=>{
 		console.log('Users');
 		console.log(JSON.stringify(docs,undefined,2));
 	},(err)=>{
 		console.log("error in fetching data from database"+err)
 	});
 
-	let a=db.collection('Users').find().count(true,{skip:2,limit:5},(err,count)=>{
+	db.collection('Users').find().count(true,{skip:2,limit:5},(err,count)=>{
 		console.log(count);
-	})
+	})*/
+	db.collection('Users').findOneAndDelete({'name':'sahil julka'}).then((res=>{
+		console.log(res);
+	}))
 })

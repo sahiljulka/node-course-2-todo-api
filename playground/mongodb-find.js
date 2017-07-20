@@ -29,7 +29,18 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err,db)=>{
 	db.collection('Users').find().count(true,{skip:2,limit:5},(err,count)=>{
 		console.log(count);
 	})*/
-	db.collection('Users').findOneAndDelete({'name':'sahil julka'}).then((res=>{
+/*	db.collection('Users').findOneAndDelete({'name':'sahil julka'}).then((res=>{
 		console.log(res);
-	}))
-})
+	}))*/
+	db.collection('Users').findOneAndUpdate({'name':'sahil julka'},
+		{
+			$set:{
+				name:'SAHIL JULKA'
+			}	
+		},
+		{
+			returnOriginal:true
+		})
+		.then((res)=>{console.log(res);})
+	})
+

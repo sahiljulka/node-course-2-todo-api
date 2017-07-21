@@ -1,8 +1,9 @@
-var express=require('express');
-var bp=require('body-parser');
-var {mongoose}=require('../db/mongoose');
-var {Todo}=require('../models/todo');
-var {User}=require('../models/user');
+const lodash=require('lodash');
+const express=require('express');
+const bp=require('body-parser');
+const {mongoose}=require('../db/mongoose');
+const {Todo}=require('../models/todo');
+const {User}=require('../models/user');
 /*var {Player}=require('../models/player');
 */const port=process.env.PORT||3000;
 
@@ -63,7 +64,44 @@ app.post('/addPlayer',(req,res)=>{
 		'wickets taken':req.body['wickets taken']
 	});
 	res.send(player);
+})	
+
+app.delete('/deleteTodo/:id',(req,res)=>{console.log(req.params.id);
+	Todo.findByIdAndRemove(req.params.id).then((res1)=>{
+		if(res1==null)
+			res.status("400").send();
+		else 
+			res.send(res1);
+	},(err)=>{
+		res.send("sasa");
+	})
 })
+
+app.patch('/updateTodo/:id',(req,res)=>{
+	var id=req.params.id;debugger;
+	var body=lodash.pick(req.body,['text','completed']);console.log(body)
+	if(lodash.isBoolean(body.completed) && body.completed){
+		body.completedAt=new Date().getTime();
+	}
+	else
+	{
+		body.completed=false
+		body.completedAt=null
+	}
+	Todo.findByIdAndUpdate(id,{$set:body},{new:true})
+	.then((todo)=>{
+		if(!todo){
+			return res.status(400).send();
+		}
+		res.send({todo})
+	},(err)=>{
+		res.send(err);
+	})
+})
+
+/*User.remove({}).then((result)=>{
+	console.log(result);
+})*/
 
 app.listen(port,()=>{
 	console.log(`Listening to port ${port}`);

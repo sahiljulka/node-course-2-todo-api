@@ -3,8 +3,8 @@ var bp=require('body-parser');
 var {mongoose}=require('../db/mongoose');
 var {Todo}=require('../models/todo');
 var {User}=require('../models/user');
-var {Player}=require('../models/player');
-const port=process.env.PORT||3000;
+/*var {Player}=require('../models/player');
+*/const port=process.env.PORT||3000;
 
 var app=express();
 
@@ -31,7 +31,7 @@ app.get('/todos',(req,res)=>{
 		(err)=>{res.send(JSON.stringify(err,undefined,2))
 	})
 })
-var id='59708f297ba31912d89c88c0';
+/*var id='59708f297ba31912d89c88c0';
 User.findById(id).then((docs)=>{
 	if(docs==null){
 		return console.log("Id not found");
@@ -39,7 +39,7 @@ User.findById(id).then((docs)=>{
 	console.log(docs);
 },(e)=>{
 	console.log("Invalid Id");
-})
+})*/
 
 app.post('/postUser',(req,res)=>{
 	var user=new User({

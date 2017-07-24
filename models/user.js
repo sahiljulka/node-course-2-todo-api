@@ -33,7 +33,7 @@ var userSchema=new mongoose.Schema({
 	}]
 })
 
-userSchema.pre('save',function(next){
+userSchema.pre('save',function(next){debugger;
 	var user=this;
 
 	if(user.isModified('password')){
@@ -87,6 +87,31 @@ userSchema.statics.findByToken=function(token){
 		'_id':decoded._id,
 		'tokens.token':token,
 		'tokens.access':'auth'
+	})
+}
+
+userSchema.statics.findByCredentials=function(loginInfo){
+	return User.findOne({'email':loginInfo.email}).then ((user)=>{
+		if(!user){
+			return new Promise((resolve,reject)=>{
+						reject('Incorrect Email');
+						})
+		}
+		return new Promise((resolve,reject)=>{
+			console.log(loginInfo.password)
+			console.log(user.password)
+			bt.compare(loginInfo.password,user.password,(err,res)=>{
+					if(res){
+						resolve(user);
+					}
+					else
+					{
+						reject('Incorrect Password'); 
+					}
+				})
+		})
+	},(e)=>{
+		console.log(error);
 	})
 }
 

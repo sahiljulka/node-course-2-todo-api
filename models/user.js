@@ -33,7 +33,7 @@ var userSchema=new mongoose.Schema({
 	}]
 })
 
-userSchema.pre('save',function(next){debugger;
+userSchema.pre('save',function(next){
 	var user=this;
 
 	if(user.isModified('password')){
@@ -49,7 +49,7 @@ userSchema.pre('save',function(next){debugger;
 });
 
 userSchema.methods.toJSON=function(){
-	debugger;
+	
 	var user=this;
 	var userObj=user.toObject();
 	

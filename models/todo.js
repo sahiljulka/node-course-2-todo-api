@@ -5,11 +5,17 @@ var Todo=mongoose.model('Todo',{
 		required:true
 	},
 	completed:{
-		type:Boolean
+		type:Boolean,
+		default:false
 		//required:true
 	},
 	completedAt:{
-		type:Number
+		type:Number,
+		default:null
+	},
+	_owner:{
+		type:mongoose.Schema.Types.ObjectId,
+		required:true,
 	}
 });
 module.exports={Todo};

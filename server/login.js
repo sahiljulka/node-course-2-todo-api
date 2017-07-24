@@ -4,7 +4,7 @@ const {authenticate}=require('./middleware/authenticate');
 
 module.exports=(function(){
 
-function login(req,res){debugger;console.log(req.body);
+function login(req,res){console.log(req.body);
 	var body=lodash.pick(req.body,['email','password']);
 	User.findByCredentials(body).then((user)=>{
 		return user.generateAuthToken();

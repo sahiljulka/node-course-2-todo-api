@@ -37,7 +37,7 @@ module.exports=(function(){
 			if(!user){
 				return Promise.reject(); 
 			}*/
-			res.send(user);
+			res.send(req.user);
 		/*},(e)=>{
 			res.status(401).send();
 		})*/

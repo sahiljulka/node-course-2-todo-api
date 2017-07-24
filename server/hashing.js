@@ -1,10 +1,33 @@
-const jwt=require('jsonwebtoken');
+const bt=require('bcryptjs');
 
-var data={
-	id:10
-}
+var  pwd='sahiljulka';
+var h;
+bt.genSalt(10,(err,salt)=>{
+	bt.hash(pwd,salt,(err,hash)=>{
+			/*h=hash;console.log(hash);
+			bt.compare(pwd,h,(err,res)=>{
+			console.log(hash);
+		})*/
+		console.log(hash);
+	})
+})
 
-var token=jwt.sign(data,'123abc');
+bt.genSalt(10,(err,salt)=>{
+	bt.hash(pwd,salt,(err,hash)=>{
+			/*h=hash;console.log(hash);
+			bt.compare(pwd,h,(err,res)=>{
+			console.log(hash);
+		})*/
+		console.log(hash);
+	})
+})
 
-console.log(jwt.verify(token,'123abc'));
-console.log(token);
+
+bt.compare(pwd,'$2a$10$bJGY58kdawpdkWpqvqEc/ekAZ.eRFTtyoXxz82MVEs5Txm7nfqV1a',(err,res)=>{
+	console.log(res);
+})
+
+bt.compare(pwd,'$2a$10$KhwzQQfZ4h85eogd5IFqFO6fOBZ6SIGqwgZ0vrxQ9JnOBfntrm5Aq',(err,res)=>{
+	console.log(res);
+})
+

@@ -4,8 +4,11 @@ const bp=require('body-parser');
 const {mongoose}=require('../db/mongoose');
 const {Todo}=require('../models/todo');
 const {User}=require('../models/user');
+const login=require('./login.js');
 /*var {Player}=require('../models/player');
 */const port=process.env.PORT||3000;
+
+console.log({"name":"sahil","rol":"123"},{colors:true});
 
 var app=express();
 
@@ -102,7 +105,8 @@ app.patch('/updateTodo/:id',(req,res)=>{
 /*User.remove({}).then((result)=>{
 	console.log(result);
 })*/
-
+login.init(app);
 app.listen(port,()=>{
 	console.log(`Listening to port ${port}`);
 })
+module.exports={app};

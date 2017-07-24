@@ -90,16 +90,26 @@ userSchema.statics.findByToken=function(token){
 	})
 }
 
-userSchema.statics.findByCredentials=function(loginInfo){
-	return User.findOne({'email':loginInfo.email}).then ((user)=>{
+userSchema.methods.removeToken=function(token){
+	var user=this;
+	return user.update({
+		$pull:{
+			tokens:{
+				token:token
+			}
+		}
+	})
+}
+
+userSchema.statics.findByCredentials=function(loginInfo){//console.log(loginInfo);
+	return User.findOne({'email':loginInfo.email}).then ((user)=>{console.log(user);
 		if(!user){
 			return new Promise((resolve,reject)=>{
 						reject('Incorrect Email');
 						})
 		}
 		return new Promise((resolve,reject)=>{
-			console.log(loginInfo.password)
-			console.log(user.password)
+
 			bt.compare(loginInfo.password,user.password,(err,res)=>{
 					if(res){
 						resolve(user);

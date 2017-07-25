@@ -15,7 +15,7 @@ if(env=='development' || env=='test'){
 }
 else if(env=='test'){
 	process.env.PORT=3000;
-}
+}*/
 else if(env=='production'){
 	process.env.MONGODB_URI='mongodb://sahil:1234567@ds043200.mlab.com:43200/todoapp';
-}*/
+}

@@ -17,33 +17,9 @@ module.exports=(function(){
 		})
 	}
 
-/*	var authenticate=(req,res,next)=>{
-		var token=req.header('x-auth');
-		User.findByToken(token).then((user)=>{
-			if(!user){
-				return Promise.reject(); 
-			}
-			req.user=user;
-			req.token=token;
-			next();
-		},(e)=>{
-			res.status(401).send();
-		})
-	}*/
-
 	function meUser(req,res){
-		/*var token=req.header('x-auth');
-		User.findByToken(token).then((user)=>{
-			if(!user){
-				return Promise.reject(); 
-			}*/
 			res.send(req.user);
-		/*},(e)=>{
-			res.status(401).send();
-		})*/
 	}
-
-
 
 	function init(appConfig){
 		appConfig.post('/addUser',addUser);

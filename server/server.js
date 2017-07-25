@@ -21,7 +21,7 @@ signup.init(app);
 login.init(app);
 todo.init(app);
 
-app.listen(port,()=>{
+app.listen(process.env.PORT,()=>{
 	console.log(`Listening to port ${port}`);
 })
 module.exports={app};
